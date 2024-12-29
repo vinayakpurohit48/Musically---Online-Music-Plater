@@ -1,6 +1,7 @@
 package com.unknowndev.musically.Apaters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.unknowndev.musically.Activities.ListSongActivity;
 import com.unknowndev.musically.Models.PlaylistModel;
 import com.unknowndev.musically.R;
 
@@ -51,6 +53,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
                 // Handle missing thumbnails (optional)
                 //holder.albumCover.setImageResource(R.drawable.placeholder_image); // Placeholder image
             }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ListSongActivity.class);
+                    intent.putExtra("ItemModel", item);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

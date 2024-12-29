@@ -54,6 +54,6 @@
         android:id="@+id/menu_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/menu_dots"
         app:tint="#FFFFFF" />
 </LinearLayout>

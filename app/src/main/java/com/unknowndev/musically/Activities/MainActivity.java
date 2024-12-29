@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unknowndev.musically.Apaters.PlaylistAdapter;
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         playlistRecyclerView = findViewById(R.id.playlistRecyclerView);
 
         trendingRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-
+        playlistRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
         getPlaylist();
-        //getTrendingMusic();
+        getTrendingMusic();
 
     }
     void getTrendingMusic(){
@@ -73,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void getPlaylist(){
-        Log.d(TAG, "getPlaylist: Method called");
         YoutubeAPIService apiService = RetrofitClient.getRetrofitInstance().create(YoutubeAPIService.class);
         Call<PlaylistModel> call = apiService.getPlaylists(
                 "snippet",
@@ -82,12 +82,10 @@ public class MainActivity extends AppCompatActivity {
                 6,
                 YOUTUBE_API_KEY
         );
-        Log.d(TAG, "getPlaylist: Instence Created");
 
         call.enqueue(new Callback<PlaylistModel>() {
             @Override
             public void onResponse(Call<PlaylistModel> call, Response<PlaylistModel> response) {
-                Log.d(TAG, "onResponse: Outside if" + response.body());
                 if (response.isSuccessful() && !response.toString().isEmpty()){
                     PlaylistModel playlistModel = response.body();
                     Log.d(TAG, "onResponse: Success" + playlistModel);

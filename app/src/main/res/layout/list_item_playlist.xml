@@ -1,0 +1,46 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center">
+
+    <!-- Album Thumbnail -->
+    <ImageView
+        android:id="@+id/albumCover"
+        android:layout_width="210dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:background="@android:color/darker_gray" />
+
+    <!-- Song Title -->
+    <TextView
+        android:id="@+id/songTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:layout_margin="5dp"
+        android:singleLine="false"
+        android:text="Song Title andmy nme dhdhd hdhd"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Artist Name -->
+    <TextView
+        android:id="@+id/channelName"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Artist Name"
+        android:textColor="#BDBDBD"
+        android:textSize="12sp"
+        android:gravity="center" />
+</LinearLayout>

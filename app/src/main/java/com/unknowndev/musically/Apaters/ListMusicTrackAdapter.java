@@ -11,11 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.unknowndev.musically.BuildConfig;
 import com.unknowndev.musically.Models.PlaylistSongModel;
 import com.unknowndev.musically.R;
+import com.unknowndev.musically.Sevices.YoutubeAPIService;
 
 import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ListMusicTrackAdapter extends RecyclerView.Adapter<ListMusicTrackAdapter.ViewHolder>  {
+
+    public static final String RAPID_API = BuildConfig.RAPID_API;
     Context context;
     List<PlaylistSongModel.PlaylistItem> PlaylistItem;
 

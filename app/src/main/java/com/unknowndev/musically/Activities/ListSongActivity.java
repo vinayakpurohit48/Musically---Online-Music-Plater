@@ -7,24 +7,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.unknowndev.musically.Apaters.ListMusicTrackAdapter;
 import com.unknowndev.musically.BuildConfig;
-import com.unknowndev.musically.Models.PlaylistModel;
+import com.unknowndev.musically.Models.YoutubeSearchResponse;
 import com.unknowndev.musically.Models.PlaylistSongModel;
 import com.unknowndev.musically.R;
 import com.unknowndev.musically.Sevices.RetrofitClient;
 import com.unknowndev.musically.Sevices.YoutubeAPIService;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +28,7 @@ public class ListSongActivity extends AppCompatActivity {
 
     private String TAG = "My App Debug";
     private String YOUTUBE_API_KEY = BuildConfig.YOUTUBE_API;
-    private PlaylistModel.Item item;
+    private YoutubeSearchResponse.Item item;
     private LinearLayout nowPlayingBar;
     private ImageView nowPlayingImage, playPauseButton, playlistCover;
     private TextView nowPlayingTitle, nowPlayingArtist, playlistTitle, playlistDescription;
@@ -62,7 +56,7 @@ public class ListSongActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        item = (PlaylistModel.Item) getIntent().getSerializableExtra("ItemModel");
+        item = (YoutubeSearchResponse.Item) getIntent().getSerializableExtra("ItemModel");
         Glide.with(this).load(item.getSnippet()
                         .getThumbnails().getHigh().getUrl())
                 .into(playlistCover);
@@ -93,7 +87,8 @@ public class ListSongActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PlaylistSongModel> call, Throwable throwable) {
-
+                Log.d(TAG, "onFailure: Error Received: " + throwable);
+                Toast.makeText(ListSongActivity.this, "Error Occurs: " + throwable,Toast.LENGTH_SHORT).show();
             }
         });
     }

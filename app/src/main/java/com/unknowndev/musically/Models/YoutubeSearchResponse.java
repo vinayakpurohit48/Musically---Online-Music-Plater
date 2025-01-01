@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 // Root object for the entire response
-public class PlaylistModel implements Serializable {
+public class YoutubeSearchResponse implements Serializable {
     private String kind;
     private String etag;
     private String nextPageToken;

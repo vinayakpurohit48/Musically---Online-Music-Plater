@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,25 +17,23 @@ import com.unknowndev.musically.Activities.ListSongActivity;
 import com.unknowndev.musically.Models.YoutubeSearchResponse;
 import com.unknowndev.musically.R;
 
-public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHolder> {
-
+public class ListSearchSuggetion extends RecyclerView.Adapter<ListSearchSuggetion.ViewHolder>{
     Context context;
     YoutubeSearchResponse playlistModel;
-
-    public PlaylistAdapter(Context context, YoutubeSearchResponse playlistModel) {
+    public ListSearchSuggetion(Context context, YoutubeSearchResponse playlistModel) {
         this.context = context;
         this.playlistModel = playlistModel;
     }
 
     @NonNull
     @Override
-    public PlaylistAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_item_playlist, parent, false);
+    public ListSearchSuggetion.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.list_item_track, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlaylistAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListSearchSuggetion.ViewHolder holder, int position) {
         YoutubeSearchResponse.Item item = playlistModel.getItems().get(position);
 
         if (item != null) {
@@ -57,9 +56,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ListSongActivity.class);
-                    intent.putExtra("ItemModel", item);
-                    context.startActivity(intent);
+                    Toast.makeText(context, "Cliked", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -70,15 +67,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         return playlistModel.getItems().size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView albumCover;
         TextView songTitle;
         TextView artistName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            albumCover = itemView.findViewById(R.id.albumCover);
-            songTitle = itemView.findViewById(R.id.songTitle);
-            artistName = itemView.findViewById(R.id.channelName);
+            albumCover = itemView.findViewById(R.id.album_art);
+            songTitle = itemView.findViewById(R.id.song_title);
+            artistName = itemView.findViewById(R.id.artist_name);
         }
     }
 }
